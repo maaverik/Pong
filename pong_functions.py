@@ -4,6 +4,7 @@ from pygame.locals import *
 
 BLACK       = (0, 0, 0)
 WHITE       = (255, 255, 255)
+RED 		= (205, 92, 92)
 WIDTH       = 600
 HEIGHT      = 400
 BALL_RADIUS = 10
@@ -51,16 +52,16 @@ def draw(paddle1_vel, paddle2_vel):
 	global paddle1_pos, paddle2_pos  
 	global score1, score2  
 
-	pygame.draw.line(window, BLACK, (int(WIDTH/2), 0), (int(WIDTH/2), HEIGHT), 2)
-	pygame.draw.line(window, BLACK, (PAD_WIDTH, 0), (PAD_WIDTH, HEIGHT), 2)
-	pygame.draw.line(window, BLACK, (WIDTH - PAD_WIDTH, 0), (WIDTH - PAD_WIDTH, HEIGHT), 2)
+	pygame.draw.line(window, WHITE, (int(WIDTH/2), 0), (int(WIDTH/2), HEIGHT), 2)
+	pygame.draw.line(window, WHITE, (PAD_WIDTH, 0), (PAD_WIDTH, HEIGHT), 2)
+	pygame.draw.line(window, WHITE, (WIDTH - PAD_WIDTH, 0), (WIDTH - PAD_WIDTH, HEIGHT), 2)
 
 	if ball_pos[1]<=BALL_RADIUS or ball_pos[1]>=HEIGHT-BALL_RADIUS:
    	    ball_vel[1]=-ball_vel[1]
 	ball_pos[0] +=ball_vel[0]
 	ball_pos[1] +=ball_vel[1]
 
-	pygame.draw.circle(window, BLACK, ball_pos, BALL_RADIUS)
+	pygame.draw.circle(window, RED, ball_pos, BALL_RADIUS)
 
 	if paddle1_pos[1]+paddle1_vel[1]>int(PAD_HEIGHT/2) and paddle1_pos[1]+paddle1_vel[1]<int(HEIGHT-PAD_HEIGHT/2):
 		paddle1_pos[1]=paddle1_pos[1]+paddle1_vel[1]
@@ -68,8 +69,8 @@ def draw(paddle1_vel, paddle2_vel):
 	if paddle2_pos[1]+paddle2_vel[1]>int(PAD_HEIGHT/2) and paddle2_pos[1]+paddle2_vel[1]<int(HEIGHT-PAD_HEIGHT/2):
 		paddle2_pos[1]=paddle2_pos[1]+paddle2_vel[1]
 	
-	pygame.draw.line(window, BLACK, (PAD_WIDTH,paddle1_pos[1]-50), (PAD_WIDTH,paddle1_pos[1]+50), PAD_WIDTH)
-	pygame.draw.line(window, BLACK, (WIDTH - PAD_WIDTH,paddle2_pos[1]-50), (WIDTH - PAD_WIDTH,paddle2_pos[1]+50), PAD_WIDTH)
+	pygame.draw.line(window, WHITE, (PAD_WIDTH,paddle1_pos[1]-50), (PAD_WIDTH,paddle1_pos[1]+50), PAD_WIDTH)
+	pygame.draw.line(window, WHITE, (WIDTH - PAD_WIDTH,paddle2_pos[1]-50), (WIDTH - PAD_WIDTH,paddle2_pos[1]+50), PAD_WIDTH)
 
 	if ball_pos[0]<=PAD_WIDTH*2+BALL_RADIUS or ball_pos[0]>=WIDTH-PAD_WIDTH*2-BALL_RADIUS:
 
@@ -87,8 +88,8 @@ def draw(paddle1_vel, paddle2_vel):
 				spawn_ball("Right")
 
 	font          = pygame.font.SysFont(None, 32)
-	msg1          = font.render(str(score1), True, BLACK)
-	msg2          = font.render(str(score2), True, BLACK)
+	msg1          = font.render(str(score1), True, WHITE)
+	msg2          = font.render(str(score2), True, WHITE)
 	
 	msg1Rect      = msg1.get_rect()
 	msg2Rect      = msg2.get_rect()

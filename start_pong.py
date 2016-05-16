@@ -14,7 +14,7 @@ paddle2_vel = [0,0]
 new_game()
 
 while True:										#main game loop
-	window.fill(WHITE)						#clear screen before drawing again
+	window.fill(BLACK)						#clear screen before drawing again
 	draw(paddle1_vel, paddle2_vel)
 
 	for event in pygame.event.get():		#event handler
