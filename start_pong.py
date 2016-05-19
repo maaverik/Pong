@@ -2,7 +2,7 @@
 
 import pygame, sys, random
 from pygame.locals import *
-from pong_functions import *
+from two_player import *
 
 pygame.init()
 
@@ -14,15 +14,15 @@ paddle2_vel = [0,0]
 new_game()
 
 while True:										#main game loop
-	window.fill(BLACK)						#clear screen before drawing again
-	draw(paddle1_vel, paddle2_vel)
+	window.fill(BLACK)							#clear screen before drawing again
+	update_and_draw(paddle1_vel, paddle2_vel)
 
-	for event in pygame.event.get():		#event handler
+	for event in pygame.event.get():			#event handler
 		if event.type == QUIT:
 			pygame.quit()
 			sys.exit()
 
-		elif event.type == KEYDOWN:
+		elif event.type == KEYDOWN:				
 			if event.key == K_UP:
 				paddle2_vel[1]=-3
 			elif event.key == K_DOWN:
@@ -43,4 +43,4 @@ while True:										#main game loop
 				paddle1_vel[1]=0	
 
 	pygame.display.update()
-	fpsClock.tick(60)						#run at 50 fps
+	fpsClock.tick(60)						#run at 60 fps
