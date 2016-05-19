@@ -2,7 +2,7 @@
 
 import pygame, sys, random
 from pygame.locals import *
-from two_player import *
+from pong_functions import *
 
 pygame.init()
 

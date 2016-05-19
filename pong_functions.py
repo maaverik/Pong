@@ -44,7 +44,7 @@ def new_game():
     spawn_ball("Left")
 
 
-def draw(paddle1_vel, paddle2_vel):
+def update_and_draw(paddle1_vel, paddle2_vel):			# handles logic and drawing
 	# Use the global variables
 	global paddle1_pos, paddle2_pos  
 	global score1, score2  
@@ -90,10 +90,10 @@ def draw(paddle1_vel, paddle2_vel):
 				ball_vel[0] =-(ball_vel[0]+1)
 		else:
 			if ball_pos[0]>int(WIDTH/2):		#check which player geys a point depending on which side the ball is in
-				score2 +=1
+				score1 +=1
 				spawn_ball("Left")
 			else:
-				score1 +=1
+				score2 +=1
 				spawn_ball("Right")
 
 	# draw scores
