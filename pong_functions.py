@@ -12,9 +12,9 @@ BALL_RADIUS = 10
 PAD_WIDTH   = 8
 PAD_HEIGHT  = 80
 
-paddle2_pos = [int(PAD_WIDTH/2),int(HEIGHT/2)]				# centre of paddles
+paddle2_pos = [int(PAD_WIDTH/2),int(HEIGHT/2)]				# centre of paddles; in [x,y] format
 paddle1_pos = [int(WIDTH-PAD_WIDTH/2),int(HEIGHT/2)]
-ball_pos    = [int(WIDTH/2),int(HEIGHT/2)]
+ball_pos    = [int(WIDTH/2),int(HEIGHT/2)]					# centre of ball
 ball_vel    = [0,0]
 score1      = 0
 score2      = 0
@@ -26,12 +26,12 @@ pygame.display.set_caption("Pong")
 
 # if direction is RIGHT, the ball's velocity is upper right, else upper left
 
-def spawn_ball(direction):
+def spawn_ball(direction):						# sets ball velocity upwards right or left
     global ball_pos, ball_vel 
     ball_pos = [int(WIDTH/2),int(HEIGHT/2)]
     ball_vel = [0,0]
     if direction == "Right":
-        ball_vel = [random.randint(2,4),-random.randint(1,3)]
+    	ball_vel = [random.randint(2,4),-random.randint(1,3)]
     elif direction == "Left":
         ball_vel = [-random.randint(2,4),-random.randint(1,3)]
 
