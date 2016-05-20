@@ -6,8 +6,8 @@ from pygame.locals import *
 BLACK       = (0, 0, 0)
 WHITE       = (255, 255, 255)
 RED 		= (205, 92, 92)
-WIDTH       = 600
-HEIGHT      = 400
+WIDTH       = 700
+HEIGHT      = 500
 BALL_RADIUS = 10
 PAD_WIDTH   = 8
 PAD_HEIGHT  = 80
@@ -44,10 +44,21 @@ def new_game():
     spawn_ball("Left")
 
 
+def get_velx():									# to access it in different file
+	return ball_vel[0]
+
+
+def get_posy():									# to access it in different file
+	return ball_pos[1]
+
+
+def get_pad_posy():
+	return paddle1_pos[1]
+
+
 def update_and_draw(paddle1_vel, paddle2_vel):			# handles logic and drawing
 	# Use the global variables
-	global paddle1_pos, paddle2_pos  
-	global score1, score2  
+	global paddle1_pos, paddle2_pos, score1, score2, ball_vel, ball_pos  
 
 	#Draw central line and borders
 	

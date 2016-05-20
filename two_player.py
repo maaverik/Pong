@@ -8,12 +8,14 @@ paddle1_vel = [0,0]
 paddle2_vel = [0,0]
 
 
-def two_player_loop():	
+def two_player_loop():
+	global paddle1_vel, paddle2_vel	
 	while True:										#main game loop
 		window.fill(BLACK)							#clear screen before drawing again
 		update_and_draw(paddle1_vel, paddle2_vel)
 
 		for event in pygame.event.get():			#event handler
+
 			if event.type == QUIT:
 				pygame.quit()
 				sys.exit()
