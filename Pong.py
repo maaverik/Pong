@@ -11,7 +11,8 @@ HEIGHT      = 500
 BALL_RADIUS = 8
 PAD_WIDTH   = 8
 PAD_HEIGHT  = 70
-DIFF 		= 2 		# positive integer representing difficulty level	
+DIFF 		= 2 		# positive integer representing difficulty level
+TOPSCORE    = 2	
 
 pygame.init()
 fpsClock = pygame.time.Clock()
@@ -65,6 +66,27 @@ def check_collision(ball, paddle1, paddle2):
 				paddle2.score +=1
 				ball.reset("Right")
 
+def win_msg(window_obj, player):
+	window_obj.fill(BLACK)
+	try:
+		font             = pygame.font.Font("fonts/Megadeth.ttf", 70)
+	except:
+		font             = pygame.font.Font(None, 70)
+	msg 			= font.render(player + " Wins", True, WHITE)
+	msgRect         = msg.get_rect()
+	msgRect.centerx = int(WIDTH/2)
+	msgRect.centery = int(HEIGHT/2)
+	window_obj.blit(msg, msgRect)
+	pygame.display.update()
+	while True:	
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				pygame.quit()
+				sys.exit()
+			elif event.type == KEYDOWN:
+				new_game(window_obj)
+				return
+
 def draw_scores(window_obj, score1, score2):
 	try:
 		font          = pygame.font.Font("fonts/impact.ttf", 40)
@@ -85,12 +107,15 @@ def draw_options(window_obj, highlight):
 	try:
 		font             = pygame.font.Font("fonts/Megadeth.ttf", 56)
 		selected_font	 = pygame.font.Font("fonts/Megadeth.ttf", 70)
+		img = pygame.image.load('movement.png')
+		img.convert()
+		window_obj.blit(img, [int(WIDTH*3/9), int(HEIGHT*7/10)])
 	except:
 		font             = pygame.font.Font(None, 56)
 		selected_font	 = pygame.font.Font(None, 70)
 	opt_list	  	 = [font, selected_font]
-	msg1             = opt_list[highlight].render("One Player", True, RED)
-	msg2             = opt_list[highlight - 1].render("Two Player", True, RED)	
+	msg1             = opt_list[highlight].render("One-Player Game", True, RED)
+	msg2             = opt_list[highlight - 1].render("Two-Player Game", True, RED)	
 	msg1Rect         = msg1.get_rect()
 	msg2Rect         = msg2.get_rect()
 	msg1Rect.centerx = int(WIDTH/2)
@@ -151,6 +176,12 @@ def game_loop(window_obj, ball, paddle1, paddle2, two_player):
 	while True:												#main game loop
 			window_obj.fill(BLACK)							#clear screen before drawing again
 			run_game(window_obj, ball, paddle1, paddle2)
+			if paddle1.score >= TOPSCORE:
+				win_msg(window_obj, 'Player 1')
+				return
+			elif paddle2.score >= TOPSCORE:
+				win_msg(window_obj, 'Player 2')
+				return
 			for event in pygame.event.get():			#event handler
 				if event.type == QUIT:
 					pygame.quit()
