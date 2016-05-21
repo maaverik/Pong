@@ -12,7 +12,7 @@ BALL_RADIUS = 8
 PAD_WIDTH   = 8
 PAD_HEIGHT  = 70
 DIFF 		= 2 		# positive integer representing difficulty level
-TOPSCORE    = 2	
+TOPSCORE    = 10	
 
 pygame.init()
 fpsClock = pygame.time.Clock()
