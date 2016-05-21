@@ -11,7 +11,7 @@ HEIGHT      = 500
 BALL_RADIUS = 8
 PAD_WIDTH   = 8
 PAD_HEIGHT  = 70
-DIFF 		= 2 	# positive integer representing difficulty level	
+DIFF 		= 2 		# positive integer representing difficulty level	
 
 pygame.init()
 fpsClock = pygame.time.Clock()
@@ -66,7 +66,10 @@ def check_collision(ball, paddle1, paddle2):
 				ball.reset("Right")
 
 def draw_scores(window_obj, score1, score2):
-	font          = pygame.font.SysFont(None, 32)
+	try:
+		font          = pygame.font.Font("fonts/impact.ttf", 40)
+	except:
+		font          = pygame.font.Font(None, 40)
 	msg1          = font.render(str(score1), True, WHITE)
 	msg2          = font.render(str(score2), True, WHITE)	
 	msg1Rect      = msg1.get_rect()
@@ -79,8 +82,12 @@ def draw_scores(window_obj, score1, score2):
 	window_obj.blit(msg2, msg2Rect)
 
 def draw_options(window_obj, highlight):
-	font             = pygame.font.Font(None, 56)
-	selected_font	 = pygame.font.SysFont(None, 70)
+	try:
+		font             = pygame.font.Font("fonts/Megadeth.ttf", 56)
+		selected_font	 = pygame.font.Font("fonts/Megadeth.ttf", 70)
+	except:
+		font             = pygame.font.Font(None, 56)
+		selected_font	 = pygame.font.Font(None, 70)
 	opt_list	  	 = [font, selected_font]
 	msg1             = opt_list[highlight].render("One Player", True, RED)
 	msg2             = opt_list[highlight - 1].render("Two Player", True, RED)	
@@ -88,8 +95,8 @@ def draw_options(window_obj, highlight):
 	msg2Rect         = msg2.get_rect()
 	msg1Rect.centerx = int(WIDTH/2)
 	msg2Rect.centerx = int(WIDTH/2)
-	msg1Rect.centery = int(HEIGHT * 4/10)
-	msg2Rect.centery = int(HEIGHT * 6/10)
+	msg1Rect.centery = int(HEIGHT * 3/10)
+	msg2Rect.centery = int(HEIGHT * 5/10)
 	window_obj.blit(msg1, msg1Rect)
 	window_obj.blit(msg2, msg2Rect)
 
@@ -107,6 +114,11 @@ def run_game(window_obj, ball, paddle1, paddle2):
 	draw_scores(window_obj, paddle1.score, paddle2.score)
 	
 def new_game(window_obj):
+	try:
+		pygame.mixer.music.load('music/cautious-path-01.mp3')
+		pygame.mixer.music.play(-1)	
+	except :
+		pass
 	ball      = Ball(BALL_RADIUS, RED)
 	ball.reset("Left")
 	paddle1   = Paddle([int(WIDTH-PAD_WIDTH*2),int(HEIGHT/2)], 0, PAD_WIDTH, PAD_HEIGHT, WHITE, 0)
@@ -130,6 +142,12 @@ def new_game(window_obj):
 	game_loop(window_obj, ball, paddle1, paddle2, option)
 
 def game_loop(window_obj, ball, paddle1, paddle2, two_player):
+	try:
+		pygame.mixer.music.stop()
+		pygame.mixer.music.load('music/barn-beat-01.mp3')
+		pygame.mixer.music.play(-1)	
+	except :
+		pass		
 	while True:												#main game loop
 			window_obj.fill(BLACK)							#clear screen before drawing again
 			run_game(window_obj, ball, paddle1, paddle2)
