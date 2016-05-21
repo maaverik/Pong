@@ -52,7 +52,7 @@ def get_posy():									# to access it in different file
 	return ball_pos[1]
 
 
-def get_pad_posy():
+def get_pad_posy():								# to access it in different file
 	return paddle1_pos[1]
 
 
